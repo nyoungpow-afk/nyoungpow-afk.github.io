@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREYR - Premium Hoodies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #fdf6f0;
+            color: #4a4a4a;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(253, 246, 240, 0);
+            backdrop-filter: blur(0px);
+            transition: all 0.5s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(253, 246, 240, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 182, 193, 0.3);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: fadeInLeft 1s ease forwards 0.3s;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links li {
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInDown 0.8s ease forwards;
+        }
+
+        .nav-links li:nth-child(1) { animation-delay: 0.5s; }
+        .nav-links li:nth-child(2) { animation-delay: 0.6s; }
+        .nav-links li:nth-child(3) { animation-delay: 0.7s; }
+        .nav-links li:nth-child(4) { animation-delay: 0.8s; }
+
+        .nav-links a {
+            color: #4a4a4a;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffb6c1;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #ffb6c1;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #fdf6f0 0%, #e8f4f8 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 182, 193, 0.15) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 120px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #b4a7d6 0%, #ffb6c1 50%, #ffd4a3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: zoomIn 1.2s ease forwards 0.2s;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: #8b8b8b;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1s;
+        }
+
+        .cta-button {
+            padding: 18px 50px;
+            background: #b4a7d6;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 1.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: #ffb6c1;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid #b4a7d6;
+            border-radius: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.5s;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: #b4a7d6;
+            border-radius: 2px;
+            animation: scrollDown 2s ease-in-out infinite;
+        }
+
+        /* Parallax Section */
+        .parallax-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5e6ff 0%, #fff5e6 100%);
+        }
+
+        .parallax-content {
+            text-align: center;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .parallax-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .parallax-content h2 {
+            font-size: 80px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+        }
+
+        .parallax-content p {
+            font-size: 20px;
+            color: #8b8b8b;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Floating Images */
+        .floating-image {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: 0 20px 60px rgba(180, 167, 214, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .floating-image.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .floating-image.left {
+            left: 10%;
+            top: 20%;
+        }
+
+        .floating-image.right {
+            right: 10%;
+            bottom: 20%;
+        }
+
+        .image-placeholder {
+            font-size: 100px;
+            filter: grayscale(20%);
+        }
+
+        /* Showcase Grid */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: repeat(2, 300px);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto 80px;
+        }
+
+        .showcase-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .showcase-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .showcase-item.large {
+            grid-row: span 2;
+        }
+
+        .showcase-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f0f7ff 0%, #fff0f5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            transition: transform 0.6s ease;
+        }
+
+        .showcase-item:hover .showcase-image {
+            transform: scale(1.1);
+        }
+
+        .showcase-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(180, 167, 214, 0.95), transparent);
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+
+        .showcase-item:hover .showcase-overlay {
+            transform: translateY(0);
+        }
+
+        .showcase-overlay h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .showcase-overlay p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Collection Section */
+        .collection {
+            padding: 120px 60px;
+            background: #fef9f5;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 60px;
+            font-weight: 900;
+            margin-bottom: 80px;
+            text-align: center;
+            letter-spacing: -1px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: #fff;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            border: 1px solid #f0e6fa;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+
+        .product-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #ffb6c1;
+            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, #f0f7ff 0%, #fff0f5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: #d4d4d4;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .product-card:hover .product-image::before {
+            opacity: 1;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .product-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            color: #ffb6c1;
+            font-weight: 600;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 60px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f5e6ff 100%);
+            position: relative;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            margin-top: 80px;
+        }
+
+        .feature {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .feature.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: transform 0.5s ease;
+        }
+
+        .feature:hover .feature-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .feature h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .feature p {
+            color: #8b8b8b;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px;
+            background: #fef9f5;
+            text-align: center;
+            border-top: 1px solid #f0e6fa;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #8b8b8b;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffb6c1;
+            transition: width 0.3s;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .footer-links a:hover {
+            color: #ffb6c1;
+            transform: translateY(-2px);
+        }
+
+        .copyright {
+            color: #b8b8b8;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scrollDown {
+            0% {
+                top: 10px;
+                opacity: 1;
+            }
+            100% {
+                top: 30px;
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px 30px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 60px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 40px;
+            }
+
+            .parallax-content h2 {
+                font-size: 50px;
+            }
+
+            .floating-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .image-placeholder {
+                font-size: 60px;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .showcase-item.large {
+                grid-row: span 1;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="logo">FREYR</div>
+        <ul class="nav-links">
+            <li><a href="#collection">COLLECTION</a></li>
+            <li><a href="#features">FEATURES</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>FREYR</h1>
+            <p>PREMIUM STREETWEAR COLLECTION</p>
+            <button class="cta-button">Explore Collection</button>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <section class="parallax-section">
+        <div class="parallax-content" id="parallax1">
+            <h2>ENGINEERED FOR COMFORT</h2>
+            <p>Every stitch, every fiber, every detail crafted with precision to deliver unmatched comfort and style.</p>
+        </div>
+        <div class="floating-image left" id="float1">
+            <div class="image-placeholder">🎨</div>
+        </div>
+        <div class="floating-image right" id="float2">
+            <div class="image-placeholder">✂️</div>
+        </div>
+    </section>
+
+    <section id="collection" class="collection">
+        <h2 class="section-title" id="collectionTitle">2025 COLLECTION</h2>
+        <div class="showcase-grid">
+            <div class="showcase-item large" id="showcase1">
+                <div class="showcase-image">👕</div>
+                <div class="showcase-overlay">
+                    <h3>SIGNATURE SERIES</h3>
+                    <p>Our most iconic designs</p>
+                </div>
+            </div>
+            <div class="showcase-item" id="showcase2">
+                <div class="showcase-image">🎭</div>
+                <div class="showcase-overlay">
+                    <h3>LIMITED EDITION</h3>
+                    <p>Exclusive drops</p>
+                </div>
+            </div>
+            <div class="showcase-item" id="showcase3">
+                <div class="showcase-image">🌈</div>
+                <div class="showcase-overlay">
+                    <h3>COLOR COLLECTION</h3>
+                    <p>Vibrant hues</p>
+                </div>
+            </div>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">🎯</div>
+                <div class="product-info">
+                    <div class="product-name">CLASSIC BLACK</div>
+                    <div class="product-price">$89.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">⚡</div>
+                <div class="product-info">
+                    <div class="product-name">ELECTRIC ORANGE</div>
+                    <div class="product-price">$89.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🔥</div>
+                <div class="product-info">
+                    <div class="product-name">FLAME RED</div>
+                    <div class="product-price">$89.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">❄️</div>
+                <div class="product-info">
+                    <div class="product-name">ARCTIC WHITE</div>
+                    <div class="product-price">$89.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🌊</div>
+                <div class="product-info">
+                    <div class="product-name">OCEAN BLUE</div>
+                    <div class="product-price">$89.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🌲</div>
+                <div class="product-info">
+                    <div class="product-name">FOREST GREEN</div>
+                    <div class="product-price">$89.00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="parallax-section">
+        <div class="parallax-content" id="parallax2">
+            <h2>BUILT TO LAST</h2>
+            <p>Premium materials meet exceptional craftsmanship. Designed for those who demand the best.</p>
+        </div>
+        <div class="floating-image left" id="float3">
+            <div class="image-placeholder">🧵</div>
+        </div>
+        <div class="floating-image right" id="float4">
+            <div class="image-placeholder">⭐</div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <h2 class="section-title" id="featuresTitle">WHY FREYR</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">🏆</div>
+                <h3>PREMIUM QUALITY</h3>
+                <p>Crafted from the finest materials with meticulous attention to detail</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✨</div>
+                <h3>TIMELESS DESIGN</h3>
+                <p>Classic styles that never go out of fashion, built to last</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <ul class="footer-links">
+                <li><a href="#">INSTAGRAM</a></li>
+                <li><a href="#">TWITTER</a></li>
+                <li><a href="#">FACEBOOK</a></li>
+                <li><a href="#">YOUTUBE</a></li>
+            </ul>
+            <p class="copyright">© 2025 FREYR. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // CTA button scroll
+        document.querySelector('.cta-button').addEventListener('click', () => {
+            document.querySelector('#collection').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.parallax-content').forEach(el => observer.observe(el));
+        document.querySelectorAll('.section-title').forEach(el => observer.observe(el));
+        document.querySelectorAll('.floating-image').forEach(el => observer.observe(el));
+        document.querySelectorAll('.showcase-item').forEach((el, index) => {
+            el.style.transitionDelay = `${index * 0.15}s`;
+            observer.observe(el);
+        });
+        document.querySelectorAll('.product-card').forEach((el, index) => {
+            el.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(el);
+        });
+        document.querySelectorAll('.feature').forEach((el, index) => {
+            el.style.transitionDelay = `${index * 0.2}s`;
+            observer.observe(el);
+        });
+
+        // Parallax scrolling effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            
+            // Parallax sections
+            const parallaxSections = document.querySelectorAll('.parallax-section');
+            parallaxSections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const offset = (window.innerHeight - rect.top) / window.innerHeight;
+                
+                if (offset > 0 && offset < 2) {
+                    const content = section.querySelector('.parallax-content');
+                    content.style.transform = `translateY(${(1 - offset) * 50}px)`;
+                    
+                    // Floating images parallax
+                    const floatingImages = section.querySelectorAll('.floating-image');
+                    floatingImages.forEach((img, index) => {
+                        const speed = index % 2 === 0 ? 30 : -30;
+                        img.style.transform = `translateY(${offset * speed}px) scale(1)`;
+                    });
+                }
+            });
+            
+            // Product cards scroll effect
+            document.querySelectorAll('.product-card.visible').forEach((card, index) => {
+                const rect = card.getBoundingClientRect();
+                const centerDistance = rect.top + rect.height / 2 - window.innerHeight / 2;
+                const rotation = (centerDistance / window.innerHeight) * 5;
+                card.style.transform = `translateY(-10px) scale(1.02) rotateY(${rotation}deg)`;
+            });
+        });
+    </script>
+</body>
+</html>
