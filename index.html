@@ -43,9 +43,6 @@
             font-size: 28px;
             font-weight: 900;
             letter-spacing: 3px;
-            opacity: 0;
-            transform: translateX(-30px);
-            animation: fadeInLeft 1s ease forwards 0.3s;
         }
 
         .nav-links {
@@ -54,17 +51,6 @@
             list-style: none;
         }
 
-        .nav-links li {
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeInDown 0.8s ease forwards;
-        }
-
-        .nav-links li:nth-child(1) { animation-delay: 0.5s; }
-        .nav-links li:nth-child(2) { animation-delay: 0.6s; }
-        .nav-links li:nth-child(3) { animation-delay: 0.7s; }
-        .nav-links li:nth-child(4) { animation-delay: 0.8s; }
-
         .nav-links a {
             color: #4a4a4a;
             text-decoration: none;
@@ -72,22 +58,6 @@
             font-weight: 500;
             letter-spacing: 1px;
             transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #ffb6c1;
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
         }
 
         .nav-links a:hover {
@@ -102,16 +72,6 @@
             justify-content: center;
             position: relative;
             background: linear-gradient(135deg, #fdf6f0 0%, #e8f4f8 100%);
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 182, 193, 0.15) 0%, transparent 50%);
-            animation: pulse 4s ease-in-out infinite;
         }
 
         .hero-content {
@@ -128,9 +88,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            opacity: 0;
-            transform: scale(0.8);
-            animation: zoomIn 1.2s ease forwards 0.2s;
         }
 
         .hero p {
@@ -138,8 +95,6 @@
             color: #8b8b8b;
             margin-bottom: 40px;
             letter-spacing: 2px;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards 1s;
         }
 
         .cta-button {
@@ -153,26 +108,7 @@
             cursor: pointer;
             transition: all 0.3s;
             text-transform: uppercase;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease forwards 1.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
+            border-radius: 8px;
         }
 
         .cta-button:hover {
@@ -182,185 +118,115 @@
             box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
         }
 
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 50px;
-            border: 2px solid #b4a7d6;
-            border-radius: 20px;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards 1.5s;
-        }
-
-        .scroll-indicator::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 8px;
-            background: #b4a7d6;
-            border-radius: 2px;
-            animation: scrollDown 2s ease-in-out infinite;
-        }
-
-        /* Parallax Section */
-        .parallax-section {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Sticky Scroll Section */
+        .sticky-section {
+            height: 500vh;
             position: relative;
-            overflow: hidden;
             background: linear-gradient(135deg, #f5e6ff 0%, #fff5e6 100%);
         }
 
-        .parallax-content {
+        .sticky-container {
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .sticky-content {
             text-align: center;
-            z-index: 2;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
+            z-index: 10;
+            position: relative;
+            pointer-events: none;
         }
 
-        .parallax-content.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .parallax-content h2 {
+        .sticky-content h2 {
             font-size: 80px;
             font-weight: 900;
             margin-bottom: 30px;
-            letter-spacing: -1px;
+            letter-spacing: -2px;
+            color: #4a4a4a;
         }
 
-        .parallax-content p {
-            font-size: 20px;
+        .sticky-content p {
+            font-size: 24px;
             color: #8b8b8b;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             line-height: 1.6;
         }
 
-        /* Floating Images */
-        .floating-image {
+        /* Floating Product Images */
+        .floating-product {
             position: absolute;
-            width: 250px;
-            height: 250px;
-            border-radius: 20px;
+            width: 350px;
+            height: 450px;
             background: #fff;
-            box-shadow: 0 20px 60px rgba(180, 167, 214, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .floating-image.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .floating-image.left {
-            left: 10%;
-            top: 20%;
-        }
-
-        .floating-image.right {
-            right: 10%;
-            bottom: 20%;
-        }
-
-        .image-placeholder {
-            font-size: 100px;
-            filter: grayscale(20%);
-        }
-
-        /* Showcase Grid */
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            grid-template-rows: repeat(2, 300px);
-            gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto 80px;
-        }
-
-        .showcase-item {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .showcase-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .showcase-item.large {
-            grid-row: span 2;
-        }
-
-        .showcase-image {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #f0f7ff 0%, #fff0f5 100%);
+            border-radius: 30px;
+            box-shadow: 0 40px 100px rgba(180, 167, 214, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 120px;
-            transition: transform 0.6s ease;
+            opacity: 0;
+            will-change: transform, opacity;
         }
 
-        .showcase-item:hover .showcase-image {
-            transform: scale(1.1);
+        /* Image Zoom Section */
+        .zoom-section {
+            height: 400vh;
+            position: relative;
+            background: #fef9f5;
         }
 
-        .showcase-overlay {
+        .zoom-container {
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .zoom-image {
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(135deg, #f0f7ff 0%, #fff0f5 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            box-shadow: 0 30px 80px rgba(180, 167, 214, 0.3);
+            will-change: transform, opacity;
+        }
+
+        .zoom-text {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 30px;
-            background: linear-gradient(to top, rgba(180, 167, 214, 0.95), transparent);
-            transform: translateY(100%);
-            transition: transform 0.5s ease;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
         }
 
-        .showcase-item:hover .showcase-overlay {
-            transform: translateY(0);
+        .zoom-text h3 {
+            font-size: 70px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: #4a4a4a;
         }
 
-        .showcase-overlay h3 {
+        .zoom-text p {
             font-size: 24px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .showcase-overlay p {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.9);
+            color: #8b8b8b;
         }
 
         /* Collection Section */
         .collection {
             padding: 120px 60px;
-            background: #fef9f5;
-            position: relative;
+            background: linear-gradient(135deg, #f5e6ff 0%, #fff5e6 100%);
         }
 
         .section-title {
@@ -369,14 +235,6 @@
             margin-bottom: 80px;
             text-align: center;
             letter-spacing: -1px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease;
-        }
-
-        .section-title.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .products-grid {
@@ -392,20 +250,14 @@
             overflow: hidden;
             cursor: pointer;
             transition: all 0.5s ease;
+            border-radius: 20px;
             border: 1px solid #f0e6fa;
-            opacity: 0;
-            transform: translateY(50px) scale(0.95);
-        }
-
-        .product-card.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
         }
 
         .product-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: #ffb6c1;
+            transform: translateY(-10px);
             box-shadow: 0 20px 60px rgba(255, 182, 193, 0.3);
+            border-color: #ffb6c1;
         }
 
         .product-image {
@@ -416,26 +268,7 @@
             align-items: center;
             justify-content: center;
             font-size: 80px;
-            color: #d4d4d4;
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-image::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 182, 193, 0.15) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-
-        .product-card:hover .product-image::before {
-            opacity: 1;
+            transition: transform 0.5s ease;
         }
 
         .product-card:hover .product-image {
@@ -444,7 +277,6 @@
 
         .product-info {
             padding: 30px;
-            transition: all 0.3s;
         }
 
         .product-name {
@@ -452,6 +284,7 @@
             font-weight: 700;
             margin-bottom: 10px;
             letter-spacing: 1px;
+            color: #4a4a4a;
         }
 
         .product-price {
@@ -463,8 +296,7 @@
         /* Features Section */
         .features {
             padding: 120px 60px;
-            background: linear-gradient(135deg, #e8f4f8 0%, #f5e6ff 100%);
-            position: relative;
+            background: #fef9f5;
         }
 
         .features-grid {
@@ -478,14 +310,6 @@
 
         .feature {
             text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .feature.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .feature-icon {
@@ -503,6 +327,7 @@
             font-size: 24px;
             margin-bottom: 15px;
             letter-spacing: 1px;
+            color: #4a4a4a;
         }
 
         .feature p {
@@ -513,14 +338,9 @@
         /* Footer */
         footer {
             padding: 60px;
-            background: #fef9f5;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f5e6ff 100%);
             text-align: center;
             border-top: 1px solid #f0e6fa;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
         }
 
         .footer-links {
@@ -536,27 +356,10 @@
             text-decoration: none;
             font-size: 14px;
             transition: all 0.3s;
-            position: relative;
-        }
-
-        .footer-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #ffb6c1;
-            transition: width 0.3s;
-        }
-
-        .footer-links a:hover::after {
-            width: 100%;
         }
 
         .footer-links a:hover {
             color: #ffb6c1;
-            transform: translateY(-2px);
         }
 
         .copyright {
@@ -564,68 +367,9 @@
             font-size: 14px;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes zoomIn {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.5;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes scrollDown {
-            0% {
-                top: 10px;
-                opacity: 1;
-            }
-            100% {
-                top: 30px;
-                opacity: 0;
-            }
-        }
-
         @media (max-width: 768px) {
             nav {
                 padding: 20px 30px;
-            }
-
-            .nav-links {
-                gap: 20px;
             }
 
             .hero h1 {
@@ -636,30 +380,38 @@
                 font-size: 18px;
             }
 
-            .section-title {
+            .sticky-content h2 {
                 font-size: 40px;
+                padding: 0 20px;
             }
 
-            .parallax-content h2 {
-                font-size: 50px;
+            .sticky-content p {
+                font-size: 16px;
+                padding: 0 20px;
             }
 
-            .floating-image {
-                width: 150px;
-                height: 150px;
+            .floating-product {
+                width: 200px;
+                height: 250px;
+                font-size: 80px;
             }
 
-            .image-placeholder {
+            .zoom-image {
+                width: 200px;
+                height: 300px;
                 font-size: 60px;
             }
 
-            .showcase-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
+            .zoom-text h3 {
+                font-size: 40px;
             }
 
-            .showcase-item.large {
-                grid-row: span 1;
+            .zoom-text p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 40px;
             }
 
             .products-grid {
@@ -674,7 +426,6 @@
         <ul class="nav-links">
             <li><a href="#collection">COLLECTION</a></li>
             <li><a href="#features">FEATURES</a></li>
-            <li><a href="#about">ABOUT</a></li>
             <li><a href="#contact">CONTACT</a></li>
         </ul>
     </nav>
@@ -682,50 +433,38 @@
     <section class="hero">
         <div class="hero-content">
             <h1>FREYR</h1>
-            <p>PREMIUM STREETWEAR COLLECTION</p>
+            <p>FOR THOSE WHO CRAVE COMFORT</p>
             <button class="cta-button">Explore Collection</button>
         </div>
-        <div class="scroll-indicator"></div>
     </section>
 
-    <section class="parallax-section">
-        <div class="parallax-content" id="parallax1">
-            <h2>ENGINEERED FOR COMFORT</h2>
-            <p>Every stitch, every fiber, every detail crafted with precision to deliver unmatched comfort and style.</p>
+    <!-- Apple-style Sticky Scroll Section -->
+    <section class="sticky-section" id="sticky1">
+        <div class="sticky-container">
+            <div class="sticky-content">
+                <h2>A Sense of Calm</h2>
+                <p>We offer a sense of calm people can carry with them every day</p>
+            </div>
+            <div class="floating-product" id="centerProduct" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">☁️</div>
         </div>
-        <div class="floating-image left" id="float1">
-            <div class="image-placeholder">🎨</div>
-        </div>
-        <div class="floating-image right" id="float2">
-            <div class="image-placeholder">✂️</div>
+    </section>
+
+    <!-- Image Zoom Section -->
+    <section class="zoom-section" id="zoomSection">
+        <div class="zoom-container">
+            <div class="floating-product" id="zoomProduct1" style="width: 250px; height: 350px; font-size: 100px; background: #fff;">🏆</div>
+            <div class="floating-product" id="zoomProduct2" style="width: 250px; height: 350px; font-size: 100px; background: #fff;">🏆</div>
+            <div class="floating-product" id="zoomProduct3" style="width: 250px; height: 350px; font-size: 100px; background: #fff;">🏆</div>
+            <div class="floating-product" id="zoomProduct4" style="width: 250px; height: 350px; font-size: 100px; background: #fff;">🏆</div>
+            <div class="zoom-text" id="zoomText">
+                <h3>Premium Quality</h3>
+                <p>Every detail matters</p>
+            </div>
         </div>
     </section>
 
     <section id="collection" class="collection">
-        <h2 class="section-title" id="collectionTitle">2025 COLLECTION</h2>
-        <div class="showcase-grid">
-            <div class="showcase-item large" id="showcase1">
-                <div class="showcase-image">👕</div>
-                <div class="showcase-overlay">
-                    <h3>SIGNATURE SERIES</h3>
-                    <p>Our most iconic designs</p>
-                </div>
-            </div>
-            <div class="showcase-item" id="showcase2">
-                <div class="showcase-image">🎭</div>
-                <div class="showcase-overlay">
-                    <h3>LIMITED EDITION</h3>
-                    <p>Exclusive drops</p>
-                </div>
-            </div>
-            <div class="showcase-item" id="showcase3">
-                <div class="showcase-image">🌈</div>
-                <div class="showcase-overlay">
-                    <h3>COLOR COLLECTION</h3>
-                    <p>Vibrant hues</p>
-                </div>
-            </div>
-        </div>
+        <h2 class="section-title">2025 COLLECTION</h2>
         <div class="products-grid">
             <div class="product-card">
                 <div class="product-image">🎯</div>
@@ -772,21 +511,8 @@
         </div>
     </section>
 
-    <section class="parallax-section">
-        <div class="parallax-content" id="parallax2">
-            <h2>BUILT TO LAST</h2>
-            <p>Premium materials meet exceptional craftsmanship. Designed for those who demand the best.</p>
-        </div>
-        <div class="floating-image left" id="float3">
-            <div class="image-placeholder">🧵</div>
-        </div>
-        <div class="floating-image right" id="float4">
-            <div class="image-placeholder">⭐</div>
-        </div>
-    </section>
-
     <section id="features" class="features">
-        <h2 class="section-title" id="featuresTitle">WHY FREYR</h2>
+        <h2 class="section-title">WHY FREYR</h2>
         <div class="features-grid">
             <div class="feature">
                 <div class="feature-icon">🏆</div>
@@ -816,14 +542,7 @@
     <script>
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
+        
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -840,68 +559,93 @@
             document.querySelector('#collection').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+        // Apple-style scroll effects
+        let ticking = false;
+        
+        function updateScrollEffects() {
+            // Navbar
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all animated elements
-        document.querySelectorAll('.parallax-content').forEach(el => observer.observe(el));
-        document.querySelectorAll('.section-title').forEach(el => observer.observe(el));
-        document.querySelectorAll('.floating-image').forEach(el => observer.observe(el));
-        document.querySelectorAll('.showcase-item').forEach((el, index) => {
-            el.style.transitionDelay = `${index * 0.15}s`;
-            observer.observe(el);
-        });
-        document.querySelectorAll('.product-card').forEach((el, index) => {
-            el.style.transitionDelay = `${index * 0.1}s`;
-            observer.observe(el);
-        });
-        document.querySelectorAll('.feature').forEach((el, index) => {
-            el.style.transitionDelay = `${index * 0.2}s`;
-            observer.observe(el);
-        });
-
-        // Parallax scrolling effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
+            // Sticky section with floating products
+            const stickySection = document.getElementById('sticky1');
+            const stickyRect = stickySection.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
             
-            // Parallax sections
-            const parallaxSections = document.querySelectorAll('.parallax-section');
-            parallaxSections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                const offset = (window.innerHeight - rect.top) / window.innerHeight;
+            // Calculate progress through the sticky section
+            const scrollStart = -stickyRect.top;
+            const scrollRange = stickyRect.height - windowHeight;
+            const stickyProgress = Math.max(0, Math.min(1, scrollStart / scrollRange));
+
+            // Animate center product - starts small and fades in
+            const centerProduct = document.getElementById('centerProduct');
+            
+            if (centerProduct) {
+                const scale = 0.5 + (stickyProgress * 0.5);
+                const opacity = Math.min(1, stickyProgress * 2);
                 
-                if (offset > 0 && offset < 2) {
-                    const content = section.querySelector('.parallax-content');
-                    content.style.transform = `translateY(${(1 - offset) * 50}px)`;
+                centerProduct.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                centerProduct.style.opacity = opacity;
+            }
+
+            // Zoom section - 4 images coming from each side
+            const zoomSection = document.getElementById('zoomSection');
+            const zoomRect = zoomSection.getBoundingClientRect();
+            
+            const zoomScrollStart = -zoomRect.top;
+            const zoomScrollRange = zoomRect.height - windowHeight;
+            const zoomProgress = Math.max(0, Math.min(1, zoomScrollStart / zoomScrollRange));
+
+            const zoomText = document.getElementById('zoomText');
+            
+            // Four products coming from each side (top, right, bottom, left)
+            const zoomProducts = [
+                { el: document.getElementById('zoomProduct1'), startX: 0, startY: -800, endX: 0, endY: -350 },
+                { el: document.getElementById('zoomProduct2'), startX: 800, startY: 0, endX: 450, endY: 0 },
+                { el: document.getElementById('zoomProduct3'), startX: 0, startY: 800, endX: 0, endY: 350 },
+                { el: document.getElementById('zoomProduct4'), startX: -800, startY: 0, endX: -450, endY: 0 }
+            ];
+
+            zoomProducts.forEach((product, index) => {
+                if (product.el) {
+                    const delay = index * 0.1;
+                    const adjustedProgress = Math.max(0, Math.min(1, (zoomProgress - delay) / (1 - delay)));
                     
-                    // Floating images parallax
-                    const floatingImages = section.querySelectorAll('.floating-image');
-                    floatingImages.forEach((img, index) => {
-                        const speed = index % 2 === 0 ? 30 : -30;
-                        img.style.transform = `translateY(${offset * speed}px) scale(1)`;
-                    });
+                    const currentX = product.startX + (product.endX - product.startX) * adjustedProgress;
+                    const currentY = product.startY + (product.endY - product.startY) * adjustedProgress;
+                    const opacity = Math.min(1, adjustedProgress * 2);
+                    
+                    product.el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+                    product.el.style.opacity = opacity;
                 }
             });
-            
-            // Product cards scroll effect
-            document.querySelectorAll('.product-card.visible').forEach((card, index) => {
-                const rect = card.getBoundingClientRect();
-                const centerDistance = rect.top + rect.height / 2 - window.innerHeight / 2;
-                const rotation = (centerDistance / window.innerHeight) * 5;
-                card.style.transform = `translateY(-10px) scale(1.02) rotateY(${rotation}deg)`;
-            });
-        });
+
+            if (zoomText) {
+                // Fade in text after products are in place
+                if (zoomProgress > 0.5) {
+                    zoomText.style.opacity = (zoomProgress - 0.5) / 0.5;
+                } else {
+                    zoomText.style.opacity = 0;
+                }
+            }
+
+            ticking = false;
+        }
+
+        function requestTick() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateScrollEffects);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
+        
+        // Initial call
+        updateScrollEffects();
     </script>
 </body>
 </html>
